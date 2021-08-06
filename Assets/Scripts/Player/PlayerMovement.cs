@@ -12,6 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public int jumpForce;
 
+    //We will work on moving these variables into a game manager after break week.
+    public int score = 0;
+    public int lives = 3;
+    bool coroutineRunning;
+
     public bool isGrounded;
     public LayerMask isGroundLayer;
     public Transform groundCheck;
@@ -73,4 +78,27 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void StartJumpForceChange()
+    {
+        if (!coroutineRunning)
+        {
+            StartCoroutine("JumpForceChange");
+        }
+        else
+        {
+            StopCoroutine("JumpForceChange");
+            StartCoroutine("JumpForceChange");
+        }
+    }
+
+    IEnumerator JumpForceChange()
+    {
+        coroutineRunning = true;
+        jumpForce = 600;
+        //change variable above this line to new jump force value.
+        yield return new WaitForSeconds(5.0f);
+        //change variable back under this line to default jump force value.
+        jumpForce = 300;
+        coroutineRunning = false;
+    }
 }

@@ -7,10 +7,10 @@ TextureImporter:
     second: Level
   - first:
       213: -7698091877536220419
-    second: DonutPlains1_DONE_1
+    second: BigCoin
   - first:
       213: -6223913005026926526
-    second: DonutPlains1_DONE_2
+    second: Coin
   - first:
       213: -8251548219702976207
     second: DonutPlains1_DONE_3
@@ -40,7 +40,7 @@ TextureImporter:
     second: DonutPlains1_DONE_11
   - first:
       213: -6400644745172546573
-    second: DonutPlains1_DONE_12
+    second: Life
   - first:
       213: -1617794307008389237
     second: DonutPlains1_DONE_13
@@ -154,7 +154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_1
+      name: BigCoin
       rect:
         serializedVersion: 2
         x: 19
@@ -175,7 +175,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_2
+      name: Coin
       rect:
         serializedVersion: 2
         x: 64
@@ -385,13 +385,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DonutPlains1_DONE_12
+      name: Life
       rect:
         serializedVersion: 2
         x: 241
         y: 84
         width: 16
-        height: 16
+        height: 15
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
