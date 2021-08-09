@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5287511945867157510}
   - component: {fileID: 5287511945867157508}
   - component: {fileID: 4951377426376725419}
+  - component: {fileID: 6600375774639870150}
   m_Layer: 0
   m_Name: Score
   m_TagString: Pickup
@@ -123,3 +124,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26666668, y: 0.53333336}
   m_EdgeRadius: 0
+--- !u!95 &6600375774639870150
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287511945867157512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2b0eb4dbf05294488bf6ad8958fa7c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
