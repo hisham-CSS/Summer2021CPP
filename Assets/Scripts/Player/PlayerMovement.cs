@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed;
     public int jumpForce;
+    public int bounceForce;
+
 
     //We will work on moving these variables into a game manager after break week.
     public int score = 0;
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask isGroundLayer;
     public Transform groundCheck;
     public float groundCheckRadius;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
         if (jumpForce <= 0)
         {
             jumpForce = 300;
+        }
+
+        if (bounceForce <= 0)
+        {
+            bounceForce = 100;
         }
 
         if (groundCheckRadius <= 0)
@@ -100,5 +107,16 @@ public class PlayerMovement : MonoBehaviour
         //change variable back under this line to default jump force value.
         jumpForce = 300;
         coroutineRunning = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Squish")
+        {
+            collision.gameObject.GetComponentInParent<EnemyWalker>().IsSquished();
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.up * bounceForce);
+            Destroy(collision.gameObject);
+        }
     }
 }

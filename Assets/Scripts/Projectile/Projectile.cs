@@ -22,6 +22,15 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyWalker walker = collision.gameObject.GetComponent<EnemyWalker>();
+            if (walker)
+                walker.TakeDamage();
+            Destroy(gameObject);
+        }
+
+
         if (collision.gameObject.tag != "Player")
         {
             Destroy(gameObject);

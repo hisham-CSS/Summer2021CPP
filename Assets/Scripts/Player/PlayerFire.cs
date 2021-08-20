@@ -44,11 +44,13 @@ public class PlayerFire : MonoBehaviour
         {
             Projectile projectileInstance = Instantiate(projectilePrefab, spawnPointLeft.position, spawnPointLeft.rotation);
             projectileInstance.speed = -projectileSpeed;
+
         }
         else
         {
             Projectile projectileInstance = Instantiate(projectilePrefab, spawnPointRight.position, spawnPointRight.rotation);
             projectileInstance.speed = projectileSpeed;
+            
         }
         
     }
