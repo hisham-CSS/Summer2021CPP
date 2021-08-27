@@ -13,10 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public int jumpForce;
     public int bounceForce;
 
-
-    //We will work on moving these variables into a game manager after break week.
-    public int score = 0;
-    public int lives = 3;
     bool coroutineRunning;
 
     public bool isGrounded;
