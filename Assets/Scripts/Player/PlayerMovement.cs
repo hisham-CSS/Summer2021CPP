@@ -76,7 +76,11 @@ public class PlayerMovement : MonoBehaviour
         if (sr.flipX && horizontalInput > 0 || !sr.flipX && horizontalInput < 0)
             sr.flipX = !sr.flipX;
 
-  
+        
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            GameManager.instance.lives--;
+        }
 
 
     }

@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
         get { return _lives; }
         set
         {
+            if (!currentCanvas)
+                currentCanvas = FindObjectOfType<CanvasManager>();
+
             if (_lives > value && value >= 0)
             {
                 //respawn code would go here
@@ -48,6 +51,9 @@ public class GameManager : MonoBehaviour
                 //game over code will go here
             }
 
+            if (currentCanvas)
+                currentCanvas.SetLivesText();
+
             Debug.Log("Lives Changed. New Lives value is: " + _lives);
         }
     }
@@ -55,6 +61,8 @@ public class GameManager : MonoBehaviour
     public GameObject playerInstance;
     public GameObject playerPrefab;
     public LevelManager currentLevel;
+
+    CanvasManager currentCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +76,9 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-        
+
+        if (!currentCanvas)
+            currentCanvas = FindObjectOfType<CanvasManager>();
     }
 
     // Update is called once per frame
@@ -87,6 +97,15 @@ public class GameManager : MonoBehaviour
             QuitGame();
         }
     }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
 
     //PLATFORM SPECIFIC CODE EXAMPLE
     public void QuitGame()
@@ -97,6 +116,8 @@ public class GameManager : MonoBehaviour
                 Application.Quit();
         #endif
     }
+
+    
 
     public void SpawnPlayer(Transform spawnLocation)
     {
