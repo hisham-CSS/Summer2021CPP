@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class CanvasManager : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioClip pauseSound;
+    public AudioMixerGroup soundFXMixer;
+    AudioSource pauseSoundAudio;
+
     [Header("Buttons")]
     public Button startButton;
     public Button quitButton;
@@ -63,6 +69,7 @@ public class CanvasManager : MonoBehaviour
     void ReturnToGame()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     void ShowSettingsMenu()
@@ -86,9 +93,22 @@ public class CanvasManager : MonoBehaviour
             {
                 pauseMenu.SetActive(!pauseMenu.activeSelf);
 
+                if (!pauseSoundAudio)
+                {
+                    pauseSoundAudio = pauseMenu.gameObject.AddComponent<AudioSource>();
+                    pauseSoundAudio.clip = pauseSound;
+                    pauseSoundAudio.loop = false;
+                }
+
+
                 if (pauseMenu.activeSelf)
                 {
-                    //HINT - PART OF THE LAB WILL GO RIGHT HERE!
+                    pauseSoundAudio.Play();
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    Time.timeScale = 1;
                 }
             }
         }

@@ -1075,9 +1075,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1767785589
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -8418568836476118505, guid: d00b0be425848954b8d36e41f4538cdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1163,6 +1163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3e73c043b515d4f958f31c381ed54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseSound: {fileID: 8300000, guid: 04d891a231e4606449fce9244c09ed78, type: 3}
+  soundFXMixer: {fileID: 3367376721816004011, guid: 29c92ec9b6196dc41836ccb21f59339b, type: 2}
   startButton: {fileID: 0}
   quitButton: {fileID: 632627222}
   settingsButton: {fileID: 0}

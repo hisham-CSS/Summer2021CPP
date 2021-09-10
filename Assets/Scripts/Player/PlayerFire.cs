@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerFire : MonoBehaviour
 {
     SpriteRenderer sr;
     Animator anim;
+    AudioSource fireAudioSource;
+
+    public AudioMixerGroup soundFXMixer;
+    public AudioClip fireSFX;
 
     public Transform spawnPointLeft;
     public Transform spawnPointRight;
@@ -32,9 +37,12 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Time.timeScale == 1)
         {
-            anim.SetBool("isFiring", true);
+            if (Input.GetButtonDown("Fire1"))
+            {
+                anim.SetBool("isFiring", true);
+            }
         }
     }
 
@@ -50,8 +58,17 @@ public class PlayerFire : MonoBehaviour
         {
             Projectile projectileInstance = Instantiate(projectilePrefab, spawnPointRight.position, spawnPointRight.rotation);
             projectileInstance.speed = projectileSpeed;
-            
         }
+
+        if (!fireAudioSource)
+        {
+            fireAudioSource = gameObject.AddComponent<AudioSource>();
+            fireAudioSource.outputAudioMixerGroup = soundFXMixer;
+            fireAudioSource.clip = fireSFX;
+            fireAudioSource.loop = false;
+        }
+
+        fireAudioSource.Play();
         
     }
 

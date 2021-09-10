@@ -227,6 +227,8 @@ MonoBehaviour:
     m_Bits: 8
   groundCheck: {fileID: 2889338884513549202}
   groundCheckRadius: 0
+  jumpSFX: {fileID: 8300000, guid: 38a2d9d95800b8e46b642aa3a4a21b14, type: 3}
+  soundFXMixer: {fileID: 3367376721816004011, guid: 29c92ec9b6196dc41836ccb21f59339b, type: 2}
 --- !u!50 &2889338885511858971
 Rigidbody2D:
   serializedVersion: 4
@@ -279,6 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf7f7338110ec04da295262df250b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundFXMixer: {fileID: 3367376721816004011, guid: 29c92ec9b6196dc41836ccb21f59339b, type: 2}
+  fireSFX: {fileID: 8300000, guid: cf5d3bfe344c6ba4d9293cfdfae5f12b, type: 3}
   spawnPointLeft: {fileID: 2889338884571984941}
   spawnPointRight: {fileID: 2889338885053483074}
   projectileSpeed: 10

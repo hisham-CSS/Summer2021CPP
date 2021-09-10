@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
     Animator anim;
+    AudioSource pickupAudioSource;
+    AudioSource jumpAudioSource;
 
     public float speed;
     public int jumpForce;
@@ -19,13 +23,20 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask isGroundLayer;
     public Transform groundCheck;
     public float groundCheckRadius;
-    
+
+
+    public AudioClip jumpSFX;
+    public AudioMixerGroup soundFXMixer;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        pickupAudioSource = GetComponent<AudioSource>();
+        pickupAudioSource.outputAudioMixerGroup = soundFXMixer;
+        pickupAudioSource.loop = false;
 
         if (speed <= 0)
         {
@@ -57,32 +68,45 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Time.timeScale == 1)
         {
-            rb.velocity = Vector2.zero;
-            rb.AddForce(Vector2.up * jumpForce);
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+
+            if (isGrounded && Input.GetButtonDown("Jump"))
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(Vector2.up * jumpForce);
+
+                if (!jumpAudioSource)
+                {
+                    jumpAudioSource = gameObject.AddComponent<AudioSource>();
+                    jumpAudioSource.outputAudioMixerGroup = soundFXMixer;
+                    jumpAudioSource.clip = jumpSFX;
+                    jumpAudioSource.loop = false;
+                }
+
+                jumpAudioSource.Play();
+
+            }
+
+            Vector2 moveDirection = new Vector2(horizontalInput * speed, rb.velocity.y);
+            rb.velocity = moveDirection;
+
+            anim.SetFloat("speed", Mathf.Abs(horizontalInput));
+            anim.SetBool("isGrounded", isGrounded);
+
+
+            if (sr.flipX && horizontalInput > 0 || !sr.flipX && horizontalInput < 0)
+                sr.flipX = !sr.flipX;
+
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                GameManager.instance.lives--;
+            }
+
         }
-
-        Vector2 moveDirection = new Vector2(horizontalInput * speed, rb.velocity.y);
-        rb.velocity = moveDirection;
-
-        anim.SetFloat("speed", Mathf.Abs(horizontalInput));
-        anim.SetBool("isGrounded", isGrounded);
-
-
-        if (sr.flipX && horizontalInput > 0 || !sr.flipX && horizontalInput < 0)
-            sr.flipX = !sr.flipX;
-
-        
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            GameManager.instance.lives--;
-        }
-
-
     }
 
     public void StartJumpForceChange()
@@ -118,5 +142,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * bounceForce);
             Destroy(collision.gameObject);
         }
+    }
+
+    public void CollectibleSound(AudioClip pickupAudio)
+    {
+        pickupAudioSource.clip = pickupAudio;
+        pickupAudioSource.Play();
     }
 }

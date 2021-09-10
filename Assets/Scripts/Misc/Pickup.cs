@@ -12,6 +12,8 @@ public class Pickup : MonoBehaviour
     }
 
     public CollectibleType currentCollectible;
+    public AudioClip pickupSound;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,9 @@ public class Pickup : MonoBehaviour
                     GameManager.instance.score++;
                     break;
             }
+
+            pm.CollectibleSound(pickupSound);
+
             Destroy(gameObject);
 
         }
