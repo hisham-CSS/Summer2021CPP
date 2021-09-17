@@ -11,6 +11,9 @@ public class CanvasManager : MonoBehaviour
     public AudioMixerGroup soundFXMixer;
     AudioSource pauseSoundAudio;
 
+    [Header("Images")]
+    public Image[] hearts;
+    
     [Header("Buttons")]
     public Button startButton;
     public Button quitButton;
@@ -61,7 +64,16 @@ public class CanvasManager : MonoBehaviour
     public void SetLivesText()
     {
         if (GameManager.instance)
-            livesText.text = GameManager.instance.lives.ToString();
+        {
+            //livesText.text = GameManager.instance.lives.ToString();
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (i < GameManager.instance.lives)
+                    hearts[i].enabled = true;
+                else
+                    hearts[i].enabled = false;
+            }
+        }
         else
             SetLivesText();
     }

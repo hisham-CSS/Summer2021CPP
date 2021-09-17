@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f610c0b4ea8ed44bc9844ec016015e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 3
+  maxLives: 10
   playerInstance: {fileID: 0}
   playerPrefab: {fileID: 2889338885511858968, guid: 0792f6049398c2e44a4bdf1bf4f58f37, type: 3}
   currentLevel: {fileID: 0}
